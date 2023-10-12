@@ -5,15 +5,15 @@ start_sscache top ; # the sscache package calculates and stores the secondary st
 puts "Getting secondary structure information"
 
 set outfile [open "sec_struct.dat" w ] ; # opens files where the data will be output
-set frames [molinfo top get numframes] ; # reads the number of frames in the .dcd trajectory
+set n [molinfo top get numframes] ; # reads the number of frames in the .dcd trajectory
 
 set prot_sec_struct [atomselect top all] ; # select the protein for which the secundary structure will be determined
 
-set numres [llength [$prot_sec_struct get resid]] ; # returns the number of residues in the protein
+set numRes [llength [$prot_sec_struct get resid]] ; # returns the number of residues in the protein
 
 for {set i 0 } { $i <= $n } { incr i } {
       animate goto $i
-      display update $i
+      display update ui
       mol ssrecalc 0
       $prot_sec_struct frame $i
       $prot_sec_struct update
